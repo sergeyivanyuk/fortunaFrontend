@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: .
+    restart: always
+    volumes:
+      - /etc/ssl/certs/dhparam.pem:/etc/nginx/ssl_certs/dhparam.pem:ro
+      - /etc/letsencrypt/live/journeysbuilder.com/fullchain.pem:/etc/nginx/ssl_certs/fullchain.pem:ro
+      - /etc/letsencrypt/live/journeysbuilder.com/privkey.pem:/etc/nginx/ssl_certs/privkey.pem:ro
+    ports:
+      - "443:443"
+
+networks:
+  default:
+    name: nick-network
+    external: true
+    
